@@ -4,26 +4,36 @@ var DateTime = luxon.DateTime;
 // apply background color to columns conditionally
 var setBackgroundColor = function (hour) {
   // get div position that matches the hour
-  var index = "";
+  var currentHourIndex = "";
   var $timeBlockArray = $(".container").children();
   $timeBlockArray.each(function (i) {
-    this.id === hour ? (index = i) : false;
+    this.id === hour ? (currentHourIndex = i) : false;
   });
 
   // color divs
   $timeBlockArray.each(function (i) {
     var $textContainer = $(this).children("div");
     switch (true) {
-      case i < index:
+      case hour === "6PM":
+        $textContainer.removeClass("present future");
         $textContainer.addClass("past");
         break;
-      case i === index:
+      case i < currentHourIndex:
+        $textContainer.removeClass("present future");
+        $textContainer.addClass("past");
+        break;
+      case i === currentHourIndex:
+        $textContainer.removeClass("past future");
         $textContainer.addClass("present");
         break;
-      case i > index:
+      case i > currentHourIndex:
+        $textContainer.removeClass("past present");
         $textContainer.addClass("future");
+        break;
       default:
+        $textContainer.removeClass("past present");
         $textContainer.addClass("future");
+        break;
     }
   });
 };
