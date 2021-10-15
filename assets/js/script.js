@@ -1,6 +1,36 @@
 // set luxon to DateTime variable
 var DateTime = luxon.DateTime;
 
+// create rows and inner elements
+var hourBlock = 9;
+var morningOrEvening = "AM";
+for (var i = 0; i < 9; i++) {
+  // switch to PM at hourBlock 12
+  if (i === 3) {
+    morningOrEvening = "PM";
+  }
+  // switch hourBlock to 1 after hourBlock 12
+  if (i === 4) {
+    hourBlock = 1;
+  }
+  
+  var $timeBlockDiv = $(
+    "<div class='row' id='" + hourBlock + morningOrEvening + "'>"
+  );
+  var $timeBlockSpan = $("<span class='hour col-1'>")
+  $timeBlockSpan.text(hourBlock + morningOrEvening)
+
+  var $timeBlockTextContainer = $("<div class='text-container col-10'>")
+
+  var $timeBlockButton = $("<button class='saveBtn col-1'>")
+
+  $timeBlockDiv.append($timeBlockSpan, $timeBlockTextContainer, $timeBlockButton)
+
+  $timeBlockDiv.appendTo($(".container"))
+
+  hourBlock++;
+}
+
 // apply background color to columns conditionally
 var setBackgroundColor = function (hour) {
   // get div position that matches the hour
