@@ -13,7 +13,7 @@ for (var i = 0; i < 9; i++) {
   if (i === 4) {
     hourBlock = 1;
   }
-  
+
   var $timeBlockDiv = $(
     "<div class='row' id='" + hourBlock + morningOrEvening + "'>"
   );
@@ -23,6 +23,7 @@ for (var i = 0; i < 9; i++) {
   var $timeBlockTextContainer = $("<div class='text-container col-10'>")
 
   var $timeBlockButton = $("<button class='saveBtn col-1'>")
+  $timeBlockButton.html("<i class='far fa-save'></i>")
 
   $timeBlockDiv.append($timeBlockSpan, $timeBlockTextContainer, $timeBlockButton)
 
