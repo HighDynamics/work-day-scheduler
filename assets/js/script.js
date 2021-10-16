@@ -71,9 +71,9 @@ var setBackgroundColor = function (hour) {
 
 // get current date and hour
 var currentTimeAndDay = function () {
-  var day = DateTime.now().toLocaleString(DateTime.DATE_MED);
+  var day = DateTime.now().toLocaleString(DateTime.DATE_HUGE);
   var time = DateTime.now().toLocaleString(DateTime.TIME_SIMPLE);
-  return time + " " + day;
+  return time + " -- " + day;
 };
 
 // get current hour with AM/PM to match element id
