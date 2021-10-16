@@ -117,8 +117,15 @@ $(".container").on("click", ".text-container", function () {
 
 // save to local storage when user clicks 'save' button
 $(".container").on("click", ".saveBtn", function () {
+  var userInput = $(this).siblings("div").children().html();
+
+  // sentinel
+  if(userInput === undefined){
+    return
+  }
+
   var parentID = $(this).parent(".row").attr("id");
-  localStorage[parentID] = $(this).siblings("div").children().html();
+  localStorage[parentID] = userInput
 });
 
 // populate time blocks with localStorage data
