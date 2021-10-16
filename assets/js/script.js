@@ -17,17 +17,21 @@ for (var i = 0; i < 9; i++) {
   var $timeBlockDiv = $(
     "<div class='row' id='" + hourBlock + morningOrEvening + "'>"
   );
-  var $timeBlockSpan = $("<span class='hour col-1'>")
-  $timeBlockSpan.text(hourBlock + morningOrEvening)
+  var $timeBlockSpan = $("<span class='hour col-1'>");
+  $timeBlockSpan.text(hourBlock + morningOrEvening);
 
-  var $timeBlockTextContainer = $("<div class='text-container col-10'>")
+  var $timeBlockTextContainer = $("<div class='text-container col-10'>");
 
-  var $timeBlockButton = $("<button class='saveBtn col-1'>")
-  $timeBlockButton.html("<i class='far fa-save'></i>")
+  var $timeBlockButton = $("<button class='saveBtn col-1'>");
+  $timeBlockButton.html("<i class='far fa-save'></i>");
 
-  $timeBlockDiv.append($timeBlockSpan, $timeBlockTextContainer, $timeBlockButton)
+  $timeBlockDiv.append(
+    $timeBlockSpan,
+    $timeBlockTextContainer,
+    $timeBlockButton
+  );
 
-  $timeBlockDiv.appendTo($(".container"))
+  $timeBlockDiv.appendTo($(".container"));
 
   hourBlock++;
 }
@@ -110,6 +114,26 @@ $(".container").on("click", ".text-container", function () {
       $(this).replaceWith("<p class='description'>" + value + "</p>");
     });
 });
+
+// save to local storage when user clicks 'save' button
+$(".container").on("click", ".saveBtn", function () {
+  var parentID = $(this).parent(".row").attr("id");
+  localStorage[parentID] = $(this).siblings("div").children().html();
+});
+
+// populate time blocks with localStorage data
+var storageArray = Object.entries(localStorage);
+$(".container")
+  .children()
+  .each(function () {
+    for (i = 0; i < storageArray.length; i++) {
+      if (this.id === storageArray[i][0]) {
+        $(this)
+          .children("div")
+          .append("<p class='description'>" + storageArray[i][1] + "</p>");
+      }
+    }
+  });
 
 // render colors on load
 setBackgroundColor(hour);
